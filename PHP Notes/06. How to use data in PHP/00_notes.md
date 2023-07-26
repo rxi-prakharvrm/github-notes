@@ -1,9 +1,10 @@
 # Forms
+
 ___
 
-### Checking for form submission
+## Checking for form submission
 
-<pre>form.php</pre>
+```check_submission.php```
 
 ```php
 <?php
@@ -33,7 +34,7 @@ if(isset($_POST['submit'])) {
 
 ### Extracting information from form
 
-<pre>form.php</pre>
+```extract_info.php```
 
 ```php
 <?php
@@ -66,7 +67,7 @@ if(isset($_POST['submit'])) {
 
 ### Validating the form values
 
-<pre>form.php</pre>
+```validate_forms.php```
 
 ```php
 <?php
@@ -105,7 +106,7 @@ if (strlen($username) < $username_min_length || strlen($username) > $username_ma
 
 ### Adding login functionality
 
-<pre>form.php</pre>
+```login_functionality.php```
 
 ```php
 <?php
