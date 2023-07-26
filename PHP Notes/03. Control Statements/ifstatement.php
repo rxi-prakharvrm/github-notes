@@ -6,13 +6,6 @@
     <title>If Statement</title>
 </head>
 <body>
-<!-- 0-4 years: Infants and young children
-5-12 years: Children
-13-19 years: Teenagers (also known as adolescents or youth)
-20-39 years: Young adults
-40-59 years: Middle-aged adults
-60-79 years: Older adults
-80+ years: Elderly -->
     <?php
     $age = 13;
     if($age > 0 && $age <= 4) {
