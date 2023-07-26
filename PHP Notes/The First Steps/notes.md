@@ -2,7 +2,7 @@
 
 ## <u>Introduction</u>
 
-<p style="color: #982ef3"> Stay Motivated</p>
+- Stay Motivated
 
 ## <u>Course Overview</u>
 
@@ -73,6 +73,8 @@
 ?>
 ```
 
+- Not Recommended (As they doesn't work well in all browsers)
+
 ```php
 <?
 // Your PHP code here
@@ -102,6 +104,7 @@ echo "Hello, World!";
 ```
 
 ### Add Dynamic Text Inside
+
 <pre>dynamic_text.php</pre>
 
 ```php
@@ -111,13 +114,13 @@ echo "Hello, World!";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dynamic text</title>
 </head>
 <body>
     <?php
-    $name="Prakhar Verma";
+    $name="James Carter";
     ?>
-    <h1><?php echo $name; ?></h1>;
+    <h1>Hello, <?php echo $name; ?></h1>;
 </body>
 </html>
 ```
@@ -129,5 +132,3 @@ echo "Hello, World!";
 
 /* multiline comment */
 ```
-
-
