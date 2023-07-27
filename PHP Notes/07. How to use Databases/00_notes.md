@@ -18,7 +18,7 @@ An open source relational database management system that is widely used for web
 
 <u>__NOTE:__</u> SQL: Structured Query Language
 
-![Database Table](image.png)
+![Database Table]("image.png")
 
 ### What is phpmyadmin?
 
