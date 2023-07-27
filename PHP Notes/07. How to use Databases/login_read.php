@@ -1,54 +1,16 @@
-<?php
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
 
-$connection = mysqli_connect('localhost', 'root', '', 'loginapp');
+<?php include "includes/header.php" ?>
 
-if ($connection) {
-    echo "We are connected";
-} else {
-    die("Database connection failed");
-}
+<div class="container">
+    <h1 class="text-center">Read</h1>
+    <div class="col-sm-6">
 
-$query = "SELECT * FROM users";
-$result = mysqli_query($connection, $query);
-
-if (!$result) {
-    die("Query Failed!");
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Mysql</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div class="container">
-        <div class="col-sm-6 p-5">
-
-            <?php
-
-            while ($row = mysqli_fetch_assoc($result)) {
-            
-            ?>
-
-            <pre>
-                <?php
-                print_r($row);
-                ?>
-            </pre>
-
-            <?php
-            }
-
-            ?>
-
-        </div>
+    <pre>
+        <?php ReadData(); ?>
+     </pre>
     </div>
-</body>
 
-</html>
+
+    <?php include "includes/footer.php" ?>
