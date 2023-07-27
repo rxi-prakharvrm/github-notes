@@ -18,7 +18,7 @@ An open source relational database management system that is widely used for web
 
 <u>__NOTE:__</u> SQL: Structured Query Language
 
-![Database Table](https://github.com/rxi-prakharvrm/github-notes/blob/main/PHP%20Notes/07.%20How%20to%20use%20Databases/image.png?raw=true)
+![Database Table](https://github.com/rxi-prakharvrm/github-notes/blob/main/PHP%20Notes/07.%20How%20to%20use%20Databases/image.png)
 
 ### What is phpmyadmin?
 
