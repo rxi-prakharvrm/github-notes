@@ -4,9 +4,13 @@ ___
 
 ## PHP Injection
 
+<<<<<<< HEAD
 PHP Object Injection is an application level vulnerability that could allow an attacker to perform different kinds of malicious attacks, such as Code Injection, SQL Injection, Path Traversal and Application Denial of Service, depending on the context.
 
 <u>__Note:__</u> ```)' DROP Table '";```, if we write it in the username section and submit the form, it can delete the entile database. So it is a big security threat.
+=======
+<u>__Note:__</u> ```)' DROP Table '"; ```, if we write it in the username section and submit the form, it can delete the entire database. So it is a big security threat.
+>>>>>>> 5d416f6abf35c71717694b600f81a364a16c2708
 
 ```php
 $username = mysqli_real_escape_string($connection, $username);
