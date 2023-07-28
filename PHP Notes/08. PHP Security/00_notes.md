@@ -4,7 +4,7 @@ ___
 
 ## PHP Injection
 
-<u>__Note:__</u> ```)' DROP Table '"; ```, if we write it in the username section and submit the form, it can delete the entile database. So it is a big security threat.
+<u>__Note:__</u> ```)' DROP Table '"; ```, if we write it in the username section and submit the form, it can delete the entire database. So it is a big security threat.
 
 ```php
 $username = mysqli_real_escape_string($connection, $username);
