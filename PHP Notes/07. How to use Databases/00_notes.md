@@ -164,50 +164,139 @@ if (isset($_POST['submit'])) {
 </html>
 ```
 
+## Performing CRUD Operations
+
+___
+
+```db.php```
+
+```php
+<?php
+
+$connection = mysqli_connect('localhost', 'root', '', 'loginapp');
+
+if (!$connection) {
+    die("Database connection failed!");
+}
+
+?>
+```
+
+```functions.php```
+
+```php
+<?php include "db.php" ?>
+
+<?php
+
+function ShowAllData() {
+    global $connection;
+
+    $query = "SELECT * FROM users";
+    $result = mysqli_query($connection, $query);
+    
+    if (!$result) {
+        die("Query Failed!");
+    }
+    
+    while($row = mysqli_fetch_assoc($result)) {
+        $id = $row['id'];
+        echo "<option value='$id'>$id</option>";
+    }
+}
+
+function CreateRows() {
+    if (isset($_POST['submit'])) {
+        global $connection;
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $username = mysqli_real_escape_string($connection, $username);
+        $password = mysqli_real_escape_string($connection, $password);
+
+        $hashFormat = "$2y$10$";
+        $salt = "iusesomecrazystrings22";
+        $hashF_and_salt = $hashFormat . $salt;
+        $password = crypt($password, $hashF_and_salt);
+
+
+        $query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+
+        $result = mysqli_query($connection, $query);
+
+        if(!$result) {
+            die("Query Failed!");
+        } else {
+            echo "Data inserted successfully!";
+        }
+    }
+}
+
+function ReadData() {    
+    global $connection;
+    $query = "SELECT * FROM users";
+    $result = mysqli_query($connection, $query);
+    if(!$result) {
+        die('Query FAILED' . mysqli_error($connection));
+    }
+        
+    while($row = mysqli_fetch_assoc($result)) {
+        print_r($row);
+    }  
+}
+
+function UpdateTable() {
+    if (isset($_POST['submit'])) {
+        global $connection;
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $id = $_POST['id'];
+
+        $query = "UPDATE users SET ";
+        $query .= "username = '$username', ";
+        $query .= "password = '$password' ";
+        $query .= "WHERE id = $id ";
+
+        $result = mysqli_query($connection, $query);
+        if (!$result) {
+            die("QUERY FAILED" . mysqli_error($connection));
+        } else {
+            echo "Record Updated";
+        }
+    }
+}
+
+function DeleteRows() {
+    global $connection;
+    $id = $_POST['id'];
+
+    $query = "DELETE FROM users ";
+    $query .= "WHERE id = $id ";
+
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    } else {
+        echo "Row Deleted Successfully!";
+    }
+}
+
+?>
+```
+
 ### Inserting data into database
 
 ```login_create.php```
 
 ```php
-<?php
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
 
-if (isset($_POST['submit'])) {
+<?php CreateRows(); ?>
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-
-    $connection = mysqli_connect('localhost', 'root', '', 'loginapp');
-
-    if ($connection) {
-        echo "We are connected";
-    } else {
-        die("Database connection failed");
-    }
-
-    $query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
-
-    $result = mysqli_query($connection, $query);
-
-    if(!$result) {
-        die("Query Failed!");
-    } else {
-        echo "Data inserted successfully!";
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Mysql</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-</head>
-
-<body>
+<?php include "includes/header.php"; ?> 
     <div class="container">
+        <h1 class="text-center">Create</h1>
         <div class="col-sm-6 p-5">
             <form action="login_create.php" method="post">
                 <div class="form-group">
@@ -224,8 +313,7 @@ if (isset($_POST['submit'])) {
             </form>
         </div>
     </div>
-</body>
-</html>
+<?php include "includes/footer.php"; ?>
 ```
 
 ### Reading data from database
@@ -233,57 +321,102 @@ if (isset($_POST['submit'])) {
 ```login_read.php```
 
 ```php
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
+
+<?php include "includes/header.php" ?>
+
+<div class="container">
+    <h1 class="text-center">Read</h1>
+    <div class="col-sm-6">
+
+    <pre>
+        <?php ReadData(); ?>
+     </pre>
+    </div>
+
+
+<?php include "includes/footer.php" ?>
+```
+
+### Updating data into the database
+
+```login_update.php```
+
+```php
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
+
+<?php UpdateTable(); ?>
+
+<?php include "includes/header.php"; ?> 
+    <div class="container">
+        <h1 class="text-center">Update</h1>
+        <div class="col-sm-6 p-5">
+            <form action="login_update.php" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <select name="id" id="">
+
+                        <?php
+                        ShowAllData();
+                        ?>
+
+                    </select>
+                </div>
+
+                <input class="btn btn-primary mt-3" type="submit" name="submit" value="Update">
+            </form>
+        </div>
+    </div>
+<?php include "includes/footer.php"; ?>
+```
+
+### Deleting data from the database
+
+```login_delete.php```
+
+```php
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
+
 <?php
 
-$connection = mysqli_connect('localhost', 'root', '', 'loginapp');
-
-if ($connection) {
-    echo "We are connected";
-} else {
-    die("Database connection failed");
-}
-
-$query = "SELECT * FROM users";
-$result = mysqli_query($connection, $query);
-
-if (!$result) {
-    die("Query Failed!");
+if (isset($_POST['submit'])) {
+    DeleteRows();    
 }
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Mysql</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-</head>
-
+<?php include "includes/header.php"; ?> 
 <body>
     <div class="container">
+        <h1 class="text-center">Delete</h1>
         <div class="col-sm-6 p-5">
+            <form action="login_delete.php" method="post">
 
-            <?php
+                <div class="form-group">
+                    <select name="id" id="">
 
-            while ($row = mysqli_fetch_assoc($result)) {
-            
-            ?>
+                        <?php
+                        ShowAllData();
+                        ?>
 
-            <pre>
-                <?php
-                print_r($row);
-                ?>
-            </pre>
+                    </select>
+                </div>
 
-            <?php
-            }
-
-            ?>
-
+                <input class="btn btn-primary mt-3" type="submit" name="submit" value="Delete">
+            </form>
         </div>
     </div>
-</body>
-</html>
+<?php include "includes/footer.php"; ?>
 ```
