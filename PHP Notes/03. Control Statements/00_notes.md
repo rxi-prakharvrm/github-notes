@@ -3,6 +3,7 @@
 <pre>ifstatement.php</pre>
 
 ```php
+<?php
 <!DOCTYPE html>
 <html lang="en">
 <head>
