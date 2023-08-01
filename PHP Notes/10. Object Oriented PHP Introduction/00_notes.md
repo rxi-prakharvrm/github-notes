@@ -65,9 +65,9 @@ if(method_exists("method1", "ClassName")) {
 
 5. **Destructor**: The __destruct() method is a special method called when an object is destroyed (usually when it goes out of scope or explicitly unset). It can be used to perform cleanup tasks.
 
-**Note:** We have a function ```class_exist("Class_name")``` that checks if the class(named ```Class_name```) exists or not.
+**Note:** We have a function ```class_exists("Class_name")``` that checks if the class(named ```Class_name```) exists or not.
 
-**Note:** We have a function ```method_exist("Method_name")``` that checks if the method(named ```Method-name```) exists or not.
+**Note:** We have a function ```method_exists("Method_name")``` that checks if the method(named ```Method-name```) exists or not.
 
 ### Methods and Properties
 
