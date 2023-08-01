@@ -221,3 +221,100 @@ $ferrari->MoovWheels("Ferrari");
 **Note:** ```function __construct()``` is used to define a constructor inside a class.
 
 **Note:** In PHP, the ```$this``` keyword refers to the current instance of the class within a class context. It is a special variable used to access the properties and methods of the object that is currently being operated upon.
+
+## Access Modifiers
+
+In PHP, access modifiers are used to control the visibility and accessibility of class properties (variables) and methods (functions) within the class and its subclasses (if any). PHP supports three main access modifiers:
+
+1. **Public:** When a class member is declared as public, it can be accessed from anywhere, including outside the class and its subclasses.
+
+2. **Protected:** When a class member is declared as protected, it can only be accessed from within the class itself and its subclasses. Outside the class and its subclasses, the protected member is not accessible.
+
+3. **Private:** When a class member is declared as private, it can only be accessed from within the class itself. It is not accessible from outside the class or its subclasses.
+
+```access_modifiers.php```
+
+```php
+<?php
+class MyClass {
+    public $publicVar;      // Public property
+    protected $protectedVar;  // Protected property
+    private $privateVar;    // Private property
+
+    public function publicMethod() {
+        // Public method
+    }
+
+    protected function protectedMethod() {
+        // Protected method
+    }
+
+    private function privateMethod() {
+        // Private method
+    }
+}
+
+$myObj = new MyClass();
+
+// Accessing public property and method
+$myObj->publicVar = "Public data";
+echo $myObj->publicVar; // Output: "Public data"
+$myObj->publicMethod(); // Output: (Whatever the public method does)
+
+// Trying to access protected and private properties and methods outside the class (will result in an error)
+$myObj->protectedVar = "Protected data"; // Error
+echo $myObj->protectedVar; // Error
+$myObj->protectedMethod(); // Error
+
+$myObj->privateVar = "Private data"; // Error
+echo $myObj->privateVar; // Error
+$myObj->privateMethod(); // Error
+?>
+```
+
+## Static Modifiers
+
+In PHP, the `static` keyword is used to declare class members (properties and methods) that belong to the class itself rather than to instances of the class. These static members are shared among all instances of the class, and they can be accessed directly using the class name without creating an object of the class.
+
+Static Properties:
+To declare a static property, use the `static` keyword before the property declaration. Static properties are initialized only once, regardless of how many instances of the class are created.
+
+```php
+class MyClass {
+    public static $staticProperty = 0;
+
+    public function incrementStaticProperty() {
+        self::$staticProperty++; // Accessing static property using self keyword
+    }
+}
+
+// Accessing static property without creating an object
+echo MyClass::$staticProperty; // Output: 0
+
+$object1 = new MyClass();
+$object1->incrementStaticProperty();
+
+$object2 = new MyClass();
+$object2->incrementStaticProperty();
+
+// Static property is shared between instances
+echo MyClass::$staticProperty; // Output: 2
+```
+
+Static Methods:
+To declare a static method, also use the `static` keyword before the method declaration. Static methods can be called directly using the class name, without the need to create an object.
+
+```php
+class MyClass {
+    public static function staticMethod() {
+        return "This is a static method.";
+    }
+}
+
+// Calling the static method without creating an object
+echo MyClass::staticMethod(); // Output: "This is a static method."
+```
+
+Static methods cannot access non-static (instance) properties or methods directly using `$this`, as they are not associated with any particular instance.
+
+Static methods and properties are often used for utility functions or to keep track of shared state across instances of the class. However, use them judiciously, as excessive use of static members can lead to tightly coupled code and hinder testability and maintainability.
