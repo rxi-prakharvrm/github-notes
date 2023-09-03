@@ -35,7 +35,7 @@
 
 ### Comparison Operators
 
-<pre>comparisor_operators.php</pre>
+<pre>comparison_operators.php</pre>
 
 ```php
 <!DOCTYPE html>
