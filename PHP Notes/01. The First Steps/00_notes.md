@@ -128,7 +128,7 @@ echo "Hello, World!";
 ### Comments in PHP
 
 ```php
-// simgle line comment
+// single line comment
 
 /* multiline comment */
 ```
